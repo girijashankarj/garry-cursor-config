@@ -1,0 +1,755 @@
+<p align="center">
+  <img src="https://img.shields.io/badge/Components-88-blue?style=for-the-badge" alt="88 Components" />
+  <img src="https://img.shields.io/badge/Token%20Savings-30%25%2B-green?style=for-the-badge" alt="30%+ Savings" />
+  <img src="https://img.shields.io/badge/Tech%20Stacks-9-orange?style=for-the-badge" alt="9 Stacks" />
+  <img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" alt="MIT License" />
+</p>
+
+# cursor-config
+
+**The open-source Cursor IDE configuration boilerplate that turns your AI assistant into a senior engineer who follows your rules, knows your codebase, and never wastes a token.**
+
+> Stop teaching your AI the same things every session. cursor-config gives Cursor permanent memory of your standards, security policies, and workflows — across every project, every team member, every prompt.
+
+---
+
+## The Problem
+
+Every time you open Cursor IDE, your AI assistant starts from zero. It doesn't know your:
+
+- Code conventions and architecture patterns
+- Security policies (and happily hardcodes your API keys)
+- Testing thresholds (and runs the full 100K-token test suite when you just wanted a type check)
+- Handler patterns, naming conventions, or folder structure
+
+You end up repeating yourself, burning tokens, and fixing the same mistakes. **cursor-config fixes this permanently.**
+
+---
+
+## How It Works
+
+```mermaid
+graph TB
+    subgraph INPUT ["Your Prompt"]
+        A[Developer types a prompt in Cursor]
+    end
+
+    subgraph HOOKS_PRE ["Pre-Processing Hooks"]
+        B[context-enrichment.sh<br/>Injects project config]
+        C[shell-guard.sh<br/>Blocks dangerous commands]
+    end
+
+    subgraph ENGINE ["cursor-config Engine"]
+        D[27 Rules<br/>Always-applied standards]
+        E[34 Agents<br/>Specialized AI assistants]
+        F[13 Skills<br/>Step-by-step workflows]
+        G[8 Commands<br/>Quick actions]
+    end
+
+    subgraph CONFIG ["Configuration Layer"]
+        H[project.json<br/>Your project settings]
+    end
+
+    subgraph HOOKS_POST ["Post-Processing Hooks"]
+        I[post-edit-check.sh<br/>Validates changes]
+        J[auto-format.sh<br/>Formats code]
+        K[coverage-check.sh<br/>Verifies thresholds]
+    end
+
+    subgraph OUTPUT ["AI Response"]
+        L[Code that follows YOUR standards<br/>with 30%+ fewer tokens]
+    end
+
+    A --> B --> C --> D
+    D --> E & F & G
+    H -.->|configures| D & E & F & G
+    E & F & G --> I --> J --> K --> L
+
+    style INPUT fill:#1a1a2e,stroke:#e94560,color:#fff
+    style HOOKS_PRE fill:#16213e,stroke:#0f3460,color:#fff
+    style ENGINE fill:#0f3460,stroke:#533483,color:#fff
+    style CONFIG fill:#533483,stroke:#e94560,color:#fff
+    style HOOKS_POST fill:#16213e,stroke:#0f3460,color:#fff
+    style OUTPUT fill:#1a1a2e,stroke:#00d2ff,color:#fff
+```
+
+---
+
+## What's Inside
+
+```mermaid
+mindmap
+  root((cursor-config<br/>88 Components))
+    Rules — 27
+      Architecture — 3
+      Backend — 4
+      Frontend — 4
+      Security — 3
+      Database — 3
+      Cloud — 3
+      Testing — 3
+      DevOps — 3
+    Agents — 34
+      Architecture — 3
+      Backend — 7
+      Frontend — 4
+      Testing — 4
+      Database — 2
+      Security — 3
+      Cloud — 3
+      DevOps — 3
+      Business — 2
+      AI/ML — 1
+      Docs — 1
+      Platform — 1
+    Skills — 13
+      Backend — 2
+      Frontend — 2
+      Testing — 2
+      Database — 2
+      Cloud — 1
+      DevOps — 2
+      Docs — 2
+    Commands — 8
+    Hooks — 6
+    Templates — 6
+```
+
+| Layer         | Count | What It Does                                      | How It's Triggered                  |
+| ------------- | ----: | ------------------------------------------------- | ----------------------------------- |
+| **Rules**     |    27 | Enforces coding standards on every AI interaction | Automatically — always on           |
+| **Agents**    |    34 | Specialized assistants for complex tasks          | On demand — `/agent-name`           |
+| **Skills**    |    13 | Step-by-step guided workflows with checklists     | Contextually — when patterns match  |
+| **Commands**  |     8 | Lightweight, token-efficient quick actions        | On demand — `/command`              |
+| **Hooks**     |     6 | Automation scripts in the AI loop                 | Event-driven — before/after actions |
+| **Templates** |     6 | Scaffolding for handlers, components, tests, etc. | Referenced by skills and agents     |
+
+---
+
+## Quick Start (5 minutes)
+
+```mermaid
+graph LR
+    A["1. Clone"] --> B["2. Configure"] --> C["3. Restart"] --> D["4. Build"]
+
+    style A fill:#22c55e,stroke:#16a34a,color:#fff,stroke-width:2px
+    style B fill:#3b82f6,stroke:#2563eb,color:#fff,stroke-width:2px
+    style C fill:#f59e0b,stroke:#d97706,color:#fff,stroke-width:2px
+    style D fill:#8b5cf6,stroke:#7c3aed,color:#fff,stroke-width:2px
+```
+
+### Step 1 — Clone
+
+```bash
+# Into your existing project
+git clone https://github.com/girijashankarj/cursor-config.git .cursor
+```
+
+### Step 2 — Configure
+
+```bash
+cp .cursor/config/project.json.template .cursor/config/project.json
+```
+
+Edit `.cursor/config/project.json` — replace placeholders with your project details:
+
+```json
+{
+	"project": { "name": "my-api", "description": "Order management service" },
+	"techStack": {
+		"language": "TypeScript",
+		"framework": "Express.js",
+		"database": "PostgreSQL",
+		"testing": "Jest",
+		"packageManager": "pnpm"
+	},
+	"testing": {
+		"coverageMinimum": 90,
+		"testCommand": "pnpm run test",
+		"typeCheckCommand": "pnpm run type-check"
+	}
+}
+```
+
+### Step 3 — Restart Cursor IDE
+
+Close and reopen Cursor. All 88 components are now active.
+
+### Step 4 — Verify
+
+Try any of these:
+
+```
+/type-check          → Runs type checking (saves ~90K tokens vs full tests)
+/code-reviewer       → AI reviews your code like a senior engineer
+/generate-handler    → Scaffolds a complete API handler
+```
+
+### Alternative: One-Line Setup
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/girijashankarj/cursor-config/main/scripts/setup-cursor.sh | bash
+```
+
+### Alternative: Git Submodule (for teams)
+
+```bash
+git submodule add https://github.com/girijashankarj/cursor-config.git .cursor
+cp .cursor/config/project.json.template .cursor/config/project.json
+```
+
+---
+
+## User Flow
+
+Here's what happens at every stage of your development workflow:
+
+```mermaid
+sequenceDiagram
+    actor Dev as Developer
+    participant C as Cursor IDE
+    participant H as Hooks
+    participant R as Rules (27)
+    participant A as Agents/Skills
+    participant Code as Codebase
+
+    Dev->>C: Types prompt or command
+    C->>H: beforeSubmitPrompt
+    H->>H: Enrich with project context
+    H->>H: Guard against expensive ops
+    H->>R: Pass enriched prompt
+    R->>R: Apply 27 always-on rules
+    Note over R: Token efficiency<br/>Security guardrails<br/>Code standards<br/>Architecture patterns
+    R->>A: Route to agent/skill/command
+    A->>Code: Generate or modify code
+    Code->>H: afterFileEdit
+    H->>H: Post-edit checks
+    H->>H: Auto-format
+    H->>H: Secret scan
+    H-->>Dev: Clean, standards-compliant code
+
+    Note over Dev,Code: Every interaction is governed by your rules.<br/>No exceptions. No token waste.
+```
+
+### Typical Workflows
+
+| What You Want        | What You Type                    | What Happens                                                   |
+| -------------------- | -------------------------------- | -------------------------------------------------------------- |
+| Build a new endpoint | "Create a POST /orders endpoint" | Skill triggers full handler scaffolding (9 files, 7-step flow) |
+| Review code          | `/code-reviewer`                 | Agent checks security, performance, correctness, tests         |
+| Fix broken tests     | `/testing-agent fix these tests` | Skill diagnoses failures, fixes mocks, verifies coverage       |
+| Quick validation     | `/type-check`                    | Runs type check (~10K tokens) instead of full tests (~100K)    |
+| Deploy safely        | `/deployment-agent`              | Agent generates deployment checklist with rollback plan        |
+| Optimize a query     | `/query-opt-agent`               | Agent runs EXPLAIN ANALYZE, rewrites query, adds indexes       |
+
+---
+
+## Processing Pipeline
+
+Every prompt flows through a layered processing pipeline that ensures quality, security, and efficiency:
+
+```mermaid
+graph TD
+    subgraph L1 ["Layer 1: Pre-Processing"]
+        direction LR
+        A1[Context Enrichment] --> A2[Shell Guard] --> A3[Pre-Commit Check]
+    end
+
+    subgraph L2 ["Layer 2: Rules Engine — Always Active"]
+        direction LR
+        B1[Token Efficiency] --> B2[Security Guardrails] --> B3[Code Standards]
+        B3 --> B4[Architecture] --> B5[Testing Standards]
+    end
+
+    subgraph L3 ["Layer 3: Specialized Processing"]
+        direction LR
+        C1[Agents<br/>Complex tasks]
+        C2[Skills<br/>Guided workflows]
+        C3[Commands<br/>Quick actions]
+    end
+
+    subgraph L4 ["Layer 4: Post-Processing"]
+        direction LR
+        D1[Edit Validation] --> D2[Auto-Format] --> D3[Coverage Check]
+    end
+
+    L1 --> L2 --> L3 --> L4
+
+    style L1 fill:#1e293b,stroke:#475569,color:#fff
+    style L2 fill:#0c4a6e,stroke:#0284c7,color:#fff
+    style L3 fill:#3730a3,stroke:#6366f1,color:#fff
+    style L4 fill:#1e293b,stroke:#475569,color:#fff
+```
+
+### Layer Breakdown
+
+**Layer 1 — Pre-Processing (Hooks)**
+Before your prompt even reaches the AI, hooks inject your project context, block dangerous shell commands, and validate git operations.
+
+**Layer 2 — Rules Engine (27 Rules, Always Active)**
+Every AI response is shaped by your rules. These aren't suggestions — they're hard constraints:
+
+| Rule Category     | What It Enforces                                            |
+| ----------------- | ----------------------------------------------------------- |
+| Token Efficiency  | No auto-running full tests/lint; confirm 50K+ ops           |
+| Security          | No hardcoded secrets; no PII in logs; parameterized queries |
+| Architecture      | Handler pattern; dependency direction; error hierarchy      |
+| Code Organization | Naming conventions; import order; folder structure          |
+| Database          | Soft delete only; required columns; migration safety        |
+| Testing           | 90%+ coverage; mock patterns; AAA pattern                   |
+
+**Layer 3 — Specialized Processing**
+Based on your prompt, the right component activates: an agent for complex tasks, a skill for guided workflows, or a command for quick operations.
+
+**Layer 4 — Post-Processing (Hooks)**
+After code is generated, hooks validate the output, auto-format files, scan for leaked secrets, and verify test coverage.
+
+---
+
+## Token Savings
+
+cursor-config is engineered to cut your AI token costs by 30% or more:
+
+```mermaid
+pie title Token Usage Comparison (per operation)
+    "Type Check (cursor-config)" : 10
+    "Saved vs Full Tests" : 90
+```
+
+| Without cursor-config           | With cursor-config                     | Tokens Saved   |
+| ------------------------------- | -------------------------------------- | -------------- |
+| Full test suite: ~100K tokens   | `/type-check`: ~10K tokens             | **~90K (90%)** |
+| Full lint run: ~50K tokens      | `/lint-check` (read_lints): ~2K tokens | **~48K (96%)** |
+| Full test suite: ~100K tokens   | `/test-single`: ~5K tokens             | **~95K (95%)** |
+| Unfiltered context: ~30K tokens | Context layering: ~10K tokens          | **~20K (67%)** |
+| Verbose AI output: ~15K tokens  | Concise guidelines: ~5K tokens         | **~10K (67%)** |
+
+**Conservative estimate**: A developer making 50 AI interactions/day saves **~200K tokens/day** — that's real money at scale.
+
+---
+
+## Customization
+
+cursor-config is 100% configuration-driven. Every component adapts to your project through a single file:
+
+### Configuration Architecture
+
+```mermaid
+graph TB
+    PJ["project.json<br/>Your Configuration"]
+
+    PJ --> R["Rules<br/>{{CONFIG.techStack.language}}<br/>{{CONFIG.testing.coverageMinimum}}"]
+    PJ --> A["Agents<br/>{{CONFIG.techStack.framework}}<br/>{{CONFIG.paths.handlerBasePath}}"]
+    PJ --> S["Skills<br/>{{CONFIG.patterns.handlerFlow}}<br/>{{CONFIG.fileNames.handlerEntry}}"]
+    PJ --> CMD["Commands<br/>{{CONFIG.testing.testCommand}}<br/>{{CONFIG.testing.typeCheckCommand}}"]
+    PJ --> H["Hooks<br/>{{CONFIG.project.name}}<br/>{{CONFIG.database.softDeleteField}}"]
+
+    style PJ fill:#f59e0b,stroke:#d97706,color:#000,stroke-width:3px
+    style R fill:#3b82f6,stroke:#2563eb,color:#fff
+    style A fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    style S fill:#22c55e,stroke:#16a34a,color:#fff
+    style CMD fill:#ef4444,stroke:#dc2626,color:#fff
+    style H fill:#06b6d4,stroke:#0891b2,color:#fff
+```
+
+### What You Can Customize
+
+| Section       | What It Controls           | Example                                        |
+| ------------- | -------------------------- | ---------------------------------------------- |
+| `project`     | Project identity           | Name, description, repo URL                    |
+| `techStack`   | Language, framework, tools | TypeScript + Express or Python + FastAPI       |
+| `paths`       | Directory structure        | Where handlers, services, and common code live |
+| `domain`      | Business entities          | Order, Product, Customer + lifecycle states    |
+| `patterns`    | Code patterns              | 7-step handler flow, error handling strategy   |
+| `testing`     | Quality gates              | 90% coverage, test/lint/type-check commands    |
+| `database`    | DB conventions             | Soft delete field, timestamp columns, naming   |
+| `packages`    | Internal packages          | `@your-org` scope, registry URL                |
+| `conventions` | Git and workflow           | Branch prefixes, commit format, PR templates   |
+
+### Ready-Made Stack Configs
+
+Don't start from scratch — pick your stack:
+
+| Stack              | File                                                           | Language   | Framework   |
+| ------------------ | -------------------------------------------------------------- | ---------- | ----------- |
+| TypeScript/Express | [`examples/typescript-express/`](examples/typescript-express/) | TypeScript | Express.js  |
+| TypeScript/NestJS  | [`examples/typescript-nest/`](examples/typescript-nest/)       | TypeScript | NestJS      |
+| Python/FastAPI     | [`examples/python-fastapi/`](examples/python-fastapi/)         | Python     | FastAPI     |
+| Go/Chi             | [`examples/go-chi/`](examples/go-chi/)                         | Go         | Chi         |
+| React SPA          | [`examples/react/`](examples/react/)                           | TypeScript | React       |
+| Next.js            | [`examples/nextjs/`](examples/nextjs/)                         | TypeScript | Next.js     |
+| Rust/Actix         | [`examples/rust-actix/`](examples/rust-actix/)                 | Rust       | Actix Web   |
+| Kotlin/Spring      | [`examples/kotlin-spring/`](examples/kotlin-spring/)           | Kotlin     | Spring Boot |
+| Flutter            | [`examples/flutter/`](examples/flutter/)                       | Dart       | Flutter     |
+
+```bash
+# Use a pre-made config
+cp examples/typescript-express/project.json .cursor/config/project.json
+# Then customize with your project specifics
+```
+
+---
+
+## Component Deep Dive
+
+### Rules (27) — Your AI's Permanent Memory
+
+Rules are the backbone. They load on every interaction, every time, with zero effort.
+
+```mermaid
+graph LR
+    subgraph MAIN ["Core"]
+        M[main-rules]
+    end
+
+    subgraph ARCH ["Architecture"]
+        A1[token-efficiency]
+        A2[core-principles]
+        A3[dependency-mgmt]
+    end
+
+    subgraph BE ["Backend"]
+        B1[handler-patterns]
+        B2[code-organization]
+        B3[error-handling]
+        B4[api-design]
+    end
+
+    subgraph FE ["Frontend"]
+        F1[components]
+        F2[accessibility]
+        F3[state-mgmt]
+        F4[performance]
+    end
+
+    subgraph SEC ["Security"]
+        S1[guardrails]
+        S2[secrets]
+        S3[compliance]
+    end
+
+    subgraph DB ["Database"]
+        D1[query-patterns]
+        D2[schema-design]
+        D3[migrations]
+    end
+
+    subgraph CLD ["Cloud"]
+        C1[infrastructure]
+        C2[serverless]
+        C3[containers]
+    end
+
+    subgraph TST ["Testing"]
+        T1[standards]
+        T2[mocks]
+        T3[integration]
+    end
+
+    subgraph OPS ["DevOps"]
+        O1[ci-cd]
+        O2[monitoring]
+        O3[documentation]
+    end
+
+    M --> ARCH & BE & FE & SEC & DB & CLD & TST & OPS
+```
+
+### Agents (34) — Your On-Demand Specialists
+
+| Domain           | Agent                | Invocation              | Best For                          |
+| ---------------- | -------------------- | ----------------------- | --------------------------------- |
+| **Architecture** | Design Agent         | `/design-agent`         | System design, trade-off analysis |
+|                  | Refactoring Agent    | `/refactoring-agent`    | Safe incremental refactoring      |
+|                  | Migration Agent      | `/migration-agent`      | Framework upgrades, migrations    |
+| **Backend**      | Code Reviewer        | `/code-reviewer`        | PR reviews, security checks       |
+|                  | Implementation Agent | `/implementation-agent` | Building features end-to-end      |
+|                  | Debugging Agent      | `/debugging-agent`      | Root cause analysis               |
+|                  | API Agent            | `/api-agent`            | REST API design                   |
+|                  | Performance Agent    | `/performance-agent`    | Bottleneck identification         |
+|                  | Database Agent       | `/database-agent`       | Schema design, queries            |
+|                  | Event Handler Agent  | `/event-handler-agent`  | Async event processing            |
+| **Frontend**     | UI Component Agent   | `/ui-component-agent`   | Accessible components             |
+|                  | State Agent          | `/state-agent`          | State management decisions        |
+|                  | Styling Agent        | `/styling-agent`        | CSS architecture, theming         |
+|                  | Frontend Perf Agent  | `/frontend-perf-agent`  | Core Web Vitals optimization      |
+| **Testing**      | Testing Agent        | `/testing-agent`        | Write comprehensive tests         |
+|                  | E2E Agent            | `/e2e-agent`            | End-to-end test flows             |
+|                  | Load Test Agent      | `/load-test-agent`      | Performance benchmarking          |
+|                  | Security Test Agent  | `/security-test-agent`  | Vulnerability scanning            |
+| **Database**     | Schema Agent         | `/schema-agent`         | Schema design, ER diagrams        |
+|                  | Query Opt Agent      | `/query-opt-agent`      | Query performance tuning          |
+| **Security**     | Security Audit Agent | `/security-audit-agent` | Comprehensive security audit      |
+|                  | Auth Agent           | `/auth-agent`           | Auth flows, RBAC                  |
+|                  | Compliance Agent     | `/compliance-agent`     | GDPR, SOC 2, HIPAA                |
+| **Cloud**        | Infra Agent          | `/infra-agent`          | IaC, cloud architecture           |
+|                  | Deployment Agent     | `/deployment-agent`     | Zero-downtime deployments         |
+|                  | Cost Agent           | `/cost-agent`           | Cloud cost optimization           |
+| **DevOps**       | CI/CD Agent          | `/ci-cd-agent`          | Pipeline design                   |
+|                  | Monitoring Agent     | `/monitoring-agent`     | Observability setup               |
+|                  | Incident Agent       | `/incident-agent`       | Incident response                 |
+| **Business**     | Requirements Agent   | `/requirements-agent`   | User stories, specs               |
+|                  | Estimation Agent     | `/estimation-agent`     | Effort estimation                 |
+| **AI/ML**        | Prompt Agent         | `/prompt-agent`         | Prompt engineering                |
+| **Docs**         | Docs Agent           | `/docs-agent`           | Technical documentation           |
+| **Platform**     | DX Agent             | `/dx-agent`             | Developer experience              |
+
+### Commands (8) — Token-Efficient Quick Actions
+
+```mermaid
+graph LR
+    TC["/type-check<br/>~10K tokens"] ---|saves 90K vs| FT["Full Tests<br/>~100K tokens"]
+    TS["/test-single<br/>~5K tokens"] ---|saves 95K vs| FT
+    LC["/lint-check<br/>~2K tokens"] ---|saves 48K vs| FL["Full Lint<br/>~50K tokens"]
+
+    style TC fill:#22c55e,stroke:#16a34a,color:#fff
+    style TS fill:#22c55e,stroke:#16a34a,color:#fff
+    style LC fill:#22c55e,stroke:#16a34a,color:#fff
+    style FT fill:#ef4444,stroke:#dc2626,color:#fff
+    style FL fill:#ef4444,stroke:#dc2626,color:#fff
+```
+
+| Command             | What It Does               | Why It's Better                   |
+| ------------------- | -------------------------- | --------------------------------- |
+| `/type-check`       | TypeScript type validation | 10K tokens vs 100K for full tests |
+| `/test-single`      | Test one file only         | 5K tokens vs 100K for full suite  |
+| `/lint-check`       | Use `read_lints` tool      | 2K tokens vs 50K for full lint    |
+| `/check-coverage`   | Coverage report            | Targeted coverage analysis        |
+| `/generate-handler` | Scaffold API handler       | Full 9-file handler in seconds    |
+| `/docker-build`     | Build Docker image         | Correct multi-stage build         |
+| `/audit-deps`       | Vulnerability scan         | Catch CVEs before shipping        |
+| `/check-secrets`    | Secret detection           | Find leaked keys before commit    |
+
+---
+
+## Sharing & Team Adoption
+
+cursor-config is designed to scale from solo developer to enterprise teams:
+
+```mermaid
+graph TD
+    subgraph SOLO ["Solo Developer"]
+        S1[Clone cursor-config<br/>into .cursor/]
+        S2[Customize project.json]
+        S3[Commit to your project]
+    end
+
+    subgraph TEAM ["Team Sharing"]
+        T1[Fork cursor-config]
+        T2[Add team-specific rules]
+        T3[Share as Git submodule<br/>in all team repos]
+    end
+
+    subgraph ORG ["Organization-Wide"]
+        O1[Maintain internal fork]
+        O2[Add org standards<br/>& compliance rules]
+        O3[Distribute via<br/>internal package registry]
+    end
+
+    subgraph OSS ["Open Source"]
+        OS1[Contribute rules & agents<br/>back to cursor-config]
+        OS2[Share stack-specific<br/>examples]
+        OS3[Build community<br/>components]
+    end
+
+    SOLO --> TEAM --> ORG
+    SOLO --> OSS
+    TEAM --> OSS
+
+    style SOLO fill:#22c55e,stroke:#16a34a,color:#fff
+    style TEAM fill:#3b82f6,stroke:#2563eb,color:#fff
+    style ORG fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    style OSS fill:#f59e0b,stroke:#d97706,color:#000
+```
+
+### Adoption Hierarchy
+
+| Level            | Method                                | Best For                           |
+| ---------------- | ------------------------------------- | ---------------------------------- |
+| **Personal**     | Clone directly into `.cursor/`        | Solo developers, personal projects |
+| **Team**         | Git submodule in shared repos         | Small teams (2-10 developers)      |
+| **Organization** | Internal fork with org-specific rules | Companies with coding standards    |
+| **Community**    | PR contributions to this repo         | Open source stack-specific configs |
+
+### Team Setup (Git Submodule)
+
+```bash
+# One team member sets it up
+git submodule add https://github.com/your-org/cursor-config.git .cursor
+git commit -m "feat: add cursor-config for team standards"
+git push
+
+# Every other team member gets it automatically
+git pull
+git submodule update --init
+
+# Update across the team
+cd .cursor && git pull origin main && cd ..
+git add .cursor && git commit -m "chore: update cursor-config"
+```
+
+### Organization Fork Strategy
+
+```bash
+# 1. Fork cursor-config to your org
+# 2. Add org-specific rules
+# 3. All teams use the org fork as their submodule
+git submodule add https://github.com/YOUR_ORG/cursor-config.git .cursor
+```
+
+---
+
+## Project Structure
+
+```
+cursor-config/
+├── .cursor/
+│   ├── config/                    # Configuration layer
+│   │   ├── project.json.template  #   Template (start here)
+│   │   ├── project.json.example   #   Complete example
+│   │   └── project-schema.json    #   JSON Schema validation
+│   ├── rules/                     # 27 always-applied rules
+│   │   ├── main-rules.mdc        #   Master rules
+│   │   ├── architecture/          #   3 architecture rules
+│   │   ├── backend/               #   4 backend rules
+│   │   ├── frontend/              #   4 frontend rules
+│   │   ├── security/              #   3 security rules
+│   │   ├── database/              #   3 database rules
+│   │   ├── cloud/                 #   3 cloud rules
+│   │   ├── testing/               #   3 testing rules
+│   │   └── devops/                #   3 devops rules
+│   ├── agents/                    # 34 specialized AI agents
+│   │   ├── architecture/          #   3 agents
+│   │   ├── backend/               #   7 agents
+│   │   ├── frontend/              #   4 agents
+│   │   ├── testing/               #   4 agents
+│   │   ├── database/              #   2 agents
+│   │   ├── security/              #   3 agents
+│   │   ├── cloud/                 #   3 agents
+│   │   ├── devops/                #   3 agents
+│   │   ├── business/              #   2 agents
+│   │   ├── ai-ml/                 #   1 agent
+│   │   ├── documentation/         #   1 agent
+│   │   └── platform/              #   1 agent
+│   ├── skills/                    # 13 guided workflows
+│   ├── commands/                  # 8 quick actions
+│   ├── hooks/                     # 6 automation scripts
+│   ├── templates/                 # 6 code templates
+│   └── settings/                  # IDE settings
+├── docs/                          # Full documentation
+│   ├── getting-started/           #   Quick start & config
+│   ├── components/                #   Component guides
+│   ├── guides/                    #   Best practices
+│   ├── security/                  #   Security guide
+│   └── reference/                 #   Config reference
+├── examples/                      # 9 stack-specific configs
+├── scripts/                       # Setup scripts
+├── .cursorignore                  # AI context exclusions
+├── AGENTS.md                      # Agent instructions
+├── CLAUDE.md                      # Claude-specific instructions
+├── CONTRIBUTING.md                # Contribution guide
+├── COMPONENT_INDEX.md             # Full component reference
+├── LICENSE                        # MIT License
+└── README.md                      # You are here
+```
+
+---
+
+## Why You Should Use This
+
+### For Individual Developers
+
+- **Save money** — 30%+ reduction in token costs adds up fast
+- **Save time** — Stop repeating your standards every session
+- **Better code** — AI follows your patterns, not random internet patterns
+- **Security by default** — Guardrails prevent accidental secret leaks
+- **Instant scaffolding** — Full handler/component in seconds, not minutes
+
+### For Teams
+
+- **Consistency** — Every developer gets the same AI behavior
+- **Onboarding** — New team members get productive on day one
+- **Standards enforcement** — Rules apply automatically, no code review friction
+- **Institutional knowledge** — Your patterns are codified, not tribal knowledge
+- **Cost control** — Token savings compound across the whole team
+
+### For Organizations
+
+- **Compliance** — Security and data handling rules are always enforced
+- **Scalability** — Same standards across 10 projects or 1,000
+- **Governance** — Central control over AI behavior across all teams
+- **ROI** — Measurable token savings and developer time savings
+- **Risk reduction** — No more hardcoded secrets or PII in logs
+
+### By The Numbers
+
+| Metric                      | Value              |
+| --------------------------- | ------------------ |
+| Components                  | 88                 |
+| Supported tech stacks       | 9                  |
+| Token savings per operation | 67-96%             |
+| Setup time                  | ~5 minutes         |
+| Configuration files to edit | 1 (`project.json`) |
+| Lines of config needed      | ~50                |
+| Price                       | Free (MIT License) |
+
+---
+
+## Contributing
+
+We welcome contributions. Whether it's a new rule for a framework we don't cover, a new agent for a workflow you've mastered, or a bug fix — every contribution helps the community.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+```mermaid
+graph LR
+    A[Fork] --> B[Branch] --> C[Build] --> D[Test in Cursor] --> E[PR]
+
+    style A fill:#22c55e,stroke:#16a34a,color:#fff
+    style B fill:#3b82f6,stroke:#2563eb,color:#fff
+    style C fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    style D fill:#f59e0b,stroke:#d97706,color:#000
+    style E fill:#ef4444,stroke:#dc2626,color:#fff
+```
+
+**High-impact areas for contribution:**
+
+- New stack-specific examples (Vue, Django, Rails, Spring, etc.)
+- Specialized agents for niche domains (ML pipelines, game dev, embedded)
+- Translations of documentation
+- Performance benchmarks and case studies
+
+---
+
+## Documentation
+
+| Document                                                      | Description                          |
+| ------------------------------------------------------------- | ------------------------------------ |
+| [Quick Start](docs/getting-started/quick-start.md)            | Get running in 5 minutes             |
+| [Configuration Guide](docs/getting-started/configuration.md)  | All configuration options            |
+| [Component Overview](docs/components/overview.md)             | How components work together         |
+| [Best Practices](docs/guides/best-practices.md)               | Get the most out of cursor-config    |
+| [Security Guide](docs/security/security-guide.md)             | Security features and policies       |
+| [Config Reference](docs/reference/configuration-reference.md) | Full `project.json` schema reference |
+| [Component Index](COMPONENT_INDEX.md)                         | Complete list of all 88 components   |
+| [Contributing](CONTRIBUTING.md)                               | How to contribute                    |
+
+---
+
+## License
+
+[MIT License](LICENSE) — use freely in personal and commercial projects. No attribution required (but appreciated).
+
+---
+
+<p align="center">
+  <strong>Stop teaching your AI the same things twice.</strong><br/>
+  Clone cursor-config, configure once, and let 88 components work for you — every prompt, every project, every day.
+</p>
+
+<p align="center">
+  <a href="#quick-start-5-minutes">Get Started</a> &nbsp;&bull;&nbsp;
+  <a href="COMPONENT_INDEX.md">Browse Components</a> &nbsp;&bull;&nbsp;
+  <a href="CONTRIBUTING.md">Contribute</a> &nbsp;&bull;&nbsp;
+  <a href="docs/getting-started/quick-start.md">Documentation</a>
+</p>
